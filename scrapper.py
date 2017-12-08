@@ -14,8 +14,10 @@ import sys
 
 def scraper(url, depth=1, out_emails=[]):
     
-    """Make recursive function , that takes one obligatory argument- URL, 
-    and have depth arg - how many steps thrue links will make function 
+    """Make recursive function , that takes 
+    one obligatory argument- URL expacted to be used url in format
+    http*(s)//:websitensame(http://google.com) or just websitename(google.com), 
+    and have depth arg (positiv int)- how many steps thrue links will make function 
     and our  list of e-mails that will be retrned"""
     
     if depth > 0:  
@@ -46,21 +48,30 @@ def scraper(url, depth=1, out_emails=[]):
             
 
 if __name__ == "__main__":
+    
+    # checking for right url
     try:
         if sys.argv[1][:4]!="http":
             print ("not so good url")
-            sys.argv[1]="https://"+sys.argv[1]
+            url="https://"+sys.argv[1]
+        
     except:
         print("There are no console parametrs. Will be used https://ru.wikipedia.org")
         out = scraper("https://ru.wikipedia.org", 2)
-    
-    if len(sys.argv) >= 3 and type(int(sys.argv[2])) == int:
         
-        out = scraper(sys.argv[1], int(sys.argv[2]))
-        
-    elif len(sys.argv) == 2 :
-        print ("there is no parametr depth. Will we used ony for this site")
-        out = scraper(sys.argv[1])
+   # cheking for right depth     
+    try :      
+        sys.argv[2] = int(sys.argv[2])
+        if sys.argv[2] >= 0:
+            out = scraper(url, int(sys.argv[2]))
+        elif sys.argv[2] < 0:
+            print("wrong depth")
+            out =[]
+            
+    except:
+        print ("There is no parametr depth or it is not int. Will we used ony for this site")
+        out = scraper(url)
+      
         
     print ("Found emails:")    
     for i in out:
