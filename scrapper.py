@@ -53,7 +53,7 @@ if __name__ == "__main__":
     try:
         if sys.argv[1][:4]!="http":
             print ("not so good url")
-            url="https://"+sys.argv[1]
+            url = "https://"+sys.argv[1]
         
     except:
         print("There are no console parametrs. Will be used https://ru.wikipedia.org")
@@ -66,7 +66,7 @@ if __name__ == "__main__":
             out = scraper(url, int(sys.argv[2]))
         elif sys.argv[2] < 0:
             print("wrong depth")
-            out =[]
+            out = []
             
     except:
         print ("There is no parametr depth or it is not int. Will we used ony for this site")
